@@ -2,6 +2,49 @@
 
 <head>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js'></script>
 </head>
+
+<body>
+  <h1>Chart Example</h1>
+  <div class="main" style="width: 500px; height: 500px">
+    <canvas id="timeSeriesChart" width="10" height="10"></canvas>
+    <script>
+      function getRandomInt(max) {
+        return Math.floor(Math.random() * Math.floor(max));
+      }
+
+      let generateGraphData = function (max) {
+        let data = []
+        let labels = []
+        for (let i = 0; i < 10; i++) {
+          data.push(getRandomInt(max))
+          labels.push("day " + i)
+        }
+        return [labels, data]
+      }
+
+      const ctx = document.getElementById('timeSeriesChart').getContext('2d');
+
+      let generatedData = generateGraphData(10)
+
+      let labels = generatedData[0]
+      let data = generatedData[1]
+
+      const chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels,
+          datasets: [{
+            label: 'How many times this stupid ass door was opened',
+            data: data,
+            borderWidth: 1
+          }]
+        },
+        options: {}
+      });
+    </script>
+  </div>
+</body>
 
 </html>
